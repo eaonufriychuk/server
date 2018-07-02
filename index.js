@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const toDoModel = require('./models/toDo');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 mongoose.connect('mongodb://127.0.0.1:27017/toDo')
   .then(() => console.log('ok'))
@@ -9,12 +10,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/toDo')
 
 const app = express();
 
+app.use(cors());
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
 app.use(bodyParser.json());
-
 
 app.get('/', (req, res) => res.send('OK'));
 
