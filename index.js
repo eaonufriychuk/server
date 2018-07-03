@@ -30,6 +30,26 @@ app.get('/todo', (req, res) => {
   })
 })
 
+app.get('/todo/priorities', (req, res) => {
+  toDoModel.collection.distinct('priority', (err, result) => {
+    if (!err && result) {
+      res.status(200).json(result)
+    } else {
+      res.status(404).send('not found');
+    }
+  })
+})
+
+app.get('/todo/categories', (req, res) => {
+  toDoModel.collection.distinct('category', (err, result) => {
+    if (!err && result) {
+      res.status(200).json(result)
+    } else {
+      res.status(404).send('not found');
+    }
+  })
+})
+
 app.post('/todo', (req, res) => {
   toDoModel.create(req.body, (err, result) => {
 
