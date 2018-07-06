@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('OK'));
 
-app.get('/todo', (req, res) => {
+app.get('/todos', (req, res) => {
   toDoModel.find({}, (err, result) => {
     if (!err && result) {
       res.status(200).json(result)
@@ -30,7 +30,7 @@ app.get('/todo', (req, res) => {
   })
 })
 
-app.get('/todo/priorities', (req, res) => {
+app.get('/todos/priorities', (req, res) => {
   toDoModel.collection.distinct('priority', (err, result) => {
     if (!err && result) {
       res.status(200).json(result)
@@ -40,7 +40,7 @@ app.get('/todo/priorities', (req, res) => {
   })
 })
 
-app.get('/todo/categories', (req, res) => {
+app.get('/todos/categories', (req, res) => {
   toDoModel.collection.distinct('category', (err, result) => {
     if (!err && result) {
       res.status(200).json(result)
@@ -50,7 +50,7 @@ app.get('/todo/categories', (req, res) => {
   })
 })
 
-app.post('/todo', (req, res) => {
+app.post('/todos', (req, res) => {
   toDoModel.create(req.body, (err, result) => {
 
     if (!err && result) {
@@ -61,7 +61,7 @@ app.post('/todo', (req, res) => {
   })
 })
 
-app.delete('/todo/:id', (req, res) => {
+app.delete('/todos/:id', (req, res) => {
   toDoModel.remove({
     _id: req.params.id
   }, (err) => {
